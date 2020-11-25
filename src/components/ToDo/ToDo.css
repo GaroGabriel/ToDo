@@ -1,0 +1,25 @@
+.input__wrapper{
+    border: rgb(156, 155, 155) 1px solid;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.input__wrapper .input__and__button .task__input{
+    width: 40%;
+}
+.task{
+    border: rgb(199, 199, 199) 1px solid;
+    border-radius: 5px;
+    max-width: 600px;
+    margin: 0 auto;
+    margin: 5px 15px;
+    background-color:rgb(249, 249, 249) ;
+}
+.task p{
+    margin: 5px 15px;
+    text-align: start;
+    color: rgb(48, 48, 48);
+  
+}
