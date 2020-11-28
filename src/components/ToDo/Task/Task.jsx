@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
+import './Task.css';
 
-
-function Task() {
+function Task(props) {
     return (
-        <div className='task' key={index}>
-            <span>{index + 1}.</span><p>{task}</p>
+        <div className='task' key={props.index}>
+            <span>{props.index + 1}.</span><p>{props.task}</p>
         </div>
     )
 }
