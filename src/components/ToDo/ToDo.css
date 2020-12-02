@@ -16,3 +16,28 @@
 .input__wrapper .input__and__button .task__input{
     width: 40%;
 }
+
+
+.task{
+    border: #bdbdbd .1px solid;
+    border-radius: 5px;
+    max-width: 600px;
+    margin: 0 auto;
+    margin: 5px 15px;
+    background-color:rgb(249, 249, 249) ;
+    text-align: start;
+    min-height: 32px;
+
+}
+.task span{
+    color: rgb(48, 48, 48);
+    margin: 0 0 0 10px;
+}
+.task p{
+    display: inline-block;
+    margin: 5px 5px;
+    text-align: start;
+    color: rgb(48, 48, 48);
+    max-width: 100%;
+  
+}

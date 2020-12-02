@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Task from './Task/Task';
+
 
 import './ToDo.css'
 
@@ -47,7 +47,10 @@ class ToDo extends Component {
                         <div className='tasks__wrapper'>
 
                             {tasks.map((task, index) => {
-                                return (<Task index={index} task={task} />
+                                return (
+                                    <div className='task' key={index}>
+                                        <span>{index + 1}.</span><p>{task}</p>
+                                    </div>
                                 )
                             })}
 
