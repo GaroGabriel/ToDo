@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Card, Button, Col, Row, InputGroup, FormControl, Container } from 'react-bootstrap';
+import { Button, Col, Row, InputGroup, FormControl, Container } from 'react-bootstrap';
 import './ToDo.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFolderPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faFolderPlus, } from '@fortawesome/free-solid-svg-icons'
 import idGenerator from './idGenerator'
 import Task from './Task/Task';
 
@@ -10,9 +10,22 @@ class ToDo extends Component {
 
     state = {
         tasks: [],
-        inputValue: ''
+        inputValue: '',
+        selectedTasks: []
     }
+    hendleCheck = (taskId) => {
+        const selectedTasks = new Set(this.state.selectedTasks)
+        if (selectedTasks.has(taskId)) {
+            selectedTasks.delete(taskId)
+        } else {
+            selectedTasks.add(taskId)
+        }
 
+        this.setState({
+            selectedTasks
+        })
+
+    }
 
     getInputValue = (event) => {
         this.setState({
@@ -40,7 +53,7 @@ class ToDo extends Component {
 
 
     onKeyPressed = (event) => {
-        if (event.keyCode == 13) {
+        if (event.keyCode === 13) {
             this.addTask()
         }
     }
@@ -62,7 +75,9 @@ class ToDo extends Component {
                 <Col xl={2} md={3} sm={6} xs={12} className='mt-3' key={index}>
                     <Task
                         data={task}
-                        onRemove={this.handleDelete} />
+                        onRemove={this.handleDelete}
+                        onCheck={this.hendleCheck}
+                    />
                 </Col>
             )
         })
@@ -82,7 +97,7 @@ class ToDo extends Component {
                     />
                     <InputGroup.Append>
                         <Button
-                            disabled={inputValue == ''}
+                            disabled={inputValue === ''}
                             style={{ outline: 'none' }}
                             variant="outline-secondary"
                             onClick={this.addTask}

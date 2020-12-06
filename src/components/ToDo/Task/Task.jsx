@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Task.css';
-import { Card, Button, Col, Row, InputGroup, FormControl, Container } from 'react-bootstrap';
+import { Card, Button, } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFolderPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 class Task extends Component {
     render() {
@@ -11,6 +11,9 @@ class Task extends Component {
         return (
             <Card>
                 <Card.Body>
+                    <input
+                        type="checkbox"
+                        onClick={() => this.props.onCheck(task._id)} />
                     <Card.Title className='Card__Title'>  {`${task.text.slice(0, 8)}...`}</Card.Title>
                     <Card.Text>
                         {task.text}
