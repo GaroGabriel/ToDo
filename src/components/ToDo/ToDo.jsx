@@ -4,6 +4,7 @@ import './ToDo.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import idGenerator from './idGenerator'
+import Task from './Task/Task';
 
 class ToDo extends Component {
 
@@ -59,17 +60,9 @@ class ToDo extends Component {
             return (
 
                 <Col xl={2} md={3} sm={6} xs={12} className='mt-3' key={index}>
-                    <Card>
-                        <Card.Body>
-                            <Card.Title className='Card__Title'> {index + 1}. {`${task.text.slice(0, 8)}...`}</Card.Title>
-                            <Card.Text>
-                                {task.text}
-                            </Card.Text>
-                            <Button variant="danger" onClick={() => this.handleDelete(task._id)}>
-                                <FontAwesomeIcon icon={faTrashAlt} />
-                            </Button>
-                        </Card.Body>
-                    </Card>
+                    <Task
+                        data={task}
+                        onRemove={this.handleDelete} />
                 </Col>
             )
         })
