@@ -11,7 +11,7 @@ class ToDo extends Component {
     state = {
         tasks: [],
         inputValue: '',
-        selectedTasks: []
+        selectedTasks: new Set()
     }
     hendleCheck = (taskId) => {
         const selectedTasks = new Set(this.state.selectedTasks)
@@ -64,7 +64,17 @@ class ToDo extends Component {
             tasks: newTasks
         })
     }
+    removeSelected = () => {
+        let tasks = [...this.state.tasks]
 
+        this.state.selectedTasks.forEach((id) => {
+            tasks = tasks.filter((task) => task._id !== id)
+        })
+        this.setState({
+            tasks,
+            selectedTasks: new Set()
+        })
+    }
 
     render() {
 
@@ -111,6 +121,13 @@ class ToDo extends Component {
                 <Row className='justify-content-center'>
                     {task}
                 </Row>
+                <Button
+                    variant="outline-danger"
+                    className='mt-3'
+                    onClick={this.removeSelected}
+                    disabled={this.state.selectedTasks.size === 0 ? true : false} >
+                    Delete Selected
+                </Button>
             </Container>
 
         )
