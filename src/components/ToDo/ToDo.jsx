@@ -85,7 +85,7 @@ class ToDo extends Component {
                         style={{ outline: 'none' }}
                         value={inputValue}
                         onChange={this.getInputValue}
-                        onKeyDown={this.onKeyPressed}
+                        onKeyDown={(event) => this.onKeyPressed(event)}
                     />
                     <InputGroup.Append>
                         <Button
