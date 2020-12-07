@@ -1,0 +1,6 @@
+
+.checked{
+    box-shadow: 1px 1px 15px #b8b8b8;
+    border: solid 1px rgb(255, 104, 104)!important;
+    background: rgb(253, 253, 253)!important;
+}

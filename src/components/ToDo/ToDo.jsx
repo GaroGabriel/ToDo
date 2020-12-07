@@ -78,7 +78,7 @@ class ToDo extends Component {
 
     render() {
 
-        const { inputValue, tasks } = this.state;
+        const { inputValue, tasks, selectedTasks } = this.state;
         const task = tasks.map((task, index) => {
             return (
 
@@ -87,6 +87,7 @@ class ToDo extends Component {
                         data={task}
                         onRemove={this.handleDelete}
                         onCheck={this.hendleCheck}
+                        disabled={!!selectedTasks.size}
                     />
                 </Col>
             )
@@ -104,6 +105,7 @@ class ToDo extends Component {
                         value={inputValue}
                         onChange={this.getInputValue}
                         onKeyDown={(event) => this.onKeyPressed(event)}
+                        disabled={selectedTasks.size}
                     />
                     <InputGroup.Append>
                         <Button
