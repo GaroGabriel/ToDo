@@ -88,6 +88,7 @@ class ToDo extends Component {
                         onRemove={this.handleDelete}
                         onCheck={this.hendleCheck}
                         disabled={!!selectedTasks.size}
+                        key={task._id}
                     />
                 </Col>
             )
@@ -105,7 +106,7 @@ class ToDo extends Component {
                         value={inputValue}
                         onChange={this.getInputValue}
                         onKeyDown={(event) => this.onKeyPressed(event)}
-                        disabled={selectedTasks.size}
+                        disabled={!!selectedTasks.size}
                     />
                     <InputGroup.Append>
                         <Button
