@@ -6,12 +6,14 @@ import './ToDo.css'
 import idGenerator from './idGenerator'
 import Task from './Task/Task';
 import AddTask from './Input/AddTask';
+import Confirm from './RemoveModal/RemoveModal';
 
 class ToDo extends Component {
 
     state = {
         tasks: [],
-        selectedTasks: new Set()
+        selectedTasks: new Set(),
+        toggle: false
     }
     hendleCheck = (taskId) => {
         const selectedTasks = new Set(this.state.selectedTasks)
@@ -27,11 +29,7 @@ class ToDo extends Component {
 
     }
 
-    getInputValue = (event) => {
-        this.setState({
-            inputValue: event.target.value
-        })
-    }
+
 
 
     addTask = (value) => {
@@ -59,6 +57,12 @@ class ToDo extends Component {
             tasks: newTasks
         })
     }
+    toggleConfirm = () => {
+        this.setState({
+            toggle: !this.state.toggle
+        })
+    }
+
     removeSelected = () => {
         let tasks = [...this.state.tasks]
 
@@ -67,13 +71,16 @@ class ToDo extends Component {
         })
         this.setState({
             tasks,
-            selectedTasks: new Set()
+            selectedTasks: new Set(),
+            toggle: false
         })
     }
 
+
+
     render() {
 
-        const { inputValue, tasks, selectedTasks } = this.state;
+        const { toggle, tasks, selectedTasks } = this.state;
         const task = tasks.map((task, index) => {
             return (
 
@@ -90,25 +97,32 @@ class ToDo extends Component {
         })
 
         return (
+            <div>
+                <Container className=" mt-3">
+                    <AddTask
+                        onAdd={this.addTask}
+                        disabled={!!selectedTasks.size}
+                    />
 
-            <Container className=" mt-3">
-                <AddTask
-                    onAdd={this.addTask}
-                    disabled={!!selectedTasks.size}
-                />
-
-                <Row className='justify-content-center'>
-                    {task}
-                </Row>
-                <Button
-                    variant="outline-danger"
-                    className='mt-3'
-                    onClick={this.removeSelected}
-                    disabled={this.state.selectedTasks.size === 0 ? true : false} >
-                    Delete Selected
+                    <Row className='justify-content-center'>
+                        {task}
+                    </Row>
+                    <Button
+                        variant="outline-danger"
+                        className='mt-3'
+                        onClick={this.toggleConfirm}
+                        disabled={this.state.selectedTasks.size === 0 ? true : false} >
+                        Delete Selected
                 </Button>
-            </Container>
+                </Container>
 
+                {toggle && <Confirm
+                    onSubmit={this.removeSelected}
+                    onClose={this.toggleConfirm}
+                    selectedTasksSize={selectedTasks.size}
+                />}
+
+            </div>
         )
 
     }
