@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { Button, Col, Row, InputGroup, FormControl, Container } from 'react-bootstrap';
+import { Button, Col, Row, Container } from 'react-bootstrap';
 import './ToDo.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFolderPlus, } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faFolderPlus, } from '@fortawesome/free-solid-svg-icons'
 import idGenerator from './idGenerator'
 import Task from './Task/Task';
+import AddTask from './Input/AddTask';
 
 class ToDo extends Component {
 
     state = {
         tasks: [],
-        inputValue: '',
         selectedTasks: new Set()
     }
     hendleCheck = (taskId) => {
@@ -34,29 +34,24 @@ class ToDo extends Component {
     }
 
 
-    addTask = () => {
-        const inputValue = this.state.inputValue
-
+    addTask = (value) => {
         const newTask = {
-            text: inputValue,
+            text: value,
             _id: idGenerator()
         }
+
         const task = [newTask, ...this.state.tasks]
-        if (inputValue) {
-            this.setState({
-                tasks: task,
-                inputValue: '',
-            })
-        }
+
+
+        this.setState({
+            tasks: task,
+        })
+
 
     }
 
 
-    onKeyPressed = (event) => {
-        if (event.keyCode === 13) {
-            this.addTask()
-        }
-    }
+
 
     handleDelete = (taskId) => {
         const newTasks = this.state.tasks.filter(task => task._id !== taskId)
@@ -97,29 +92,10 @@ class ToDo extends Component {
         return (
 
             <Container className=" mt-3">
-                <InputGroup className="mb-3">
-                    <FormControl
-                        placeholder="Create new task"
-                        aria-label="Create new task"
-                        aria-describedby="basic-addon2"
-                        style={{ outline: 'none' }}
-                        value={inputValue}
-                        onChange={this.getInputValue}
-                        onKeyDown={(event) => this.onKeyPressed(event)}
-                        disabled={!!selectedTasks.size}
-                    />
-                    <InputGroup.Append>
-                        <Button
-                            disabled={inputValue === ''}
-                            style={{ outline: 'none' }}
-                            variant="outline-secondary"
-                            onClick={this.addTask}
-
-                        >
-                            <FontAwesomeIcon icon={faFolderPlus} />
-                        </Button>
-                    </InputGroup.Append>
-                </InputGroup>
+                <AddTask
+                    onAdd={this.addTask}
+                    disabled={!!selectedTasks.size}
+                />
 
                 <Row className='justify-content-center'>
                     {task}
