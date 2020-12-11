@@ -1,5 +1,8 @@
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck , faTimes } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function Confirm(props) {
     return (
@@ -9,13 +12,12 @@ export default function Confirm(props) {
             </Modal.Header>
             <Modal.Footer>
                 <Button variant="primary " onClick={props.onClose}>
-                    No
+                <FontAwesomeIcon icon={faTimes} />
               </Button>
                 <Button variant="danger" onClick={props.onSubmit}>
-                    Yes
+                <FontAwesomeIcon icon={faCheck} />
               </Button>
             </Modal.Footer>
         </Modal>
     );
 }
-

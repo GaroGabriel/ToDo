@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Col, Row, Container } from 'react-bootstrap';
-import './ToDo.css'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faFolderPlus, } from '@fortawesome/free-solid-svg-icons'
-import idGenerator from './idGenerator'
+import './ToDo.css';
+import idGenerator from './idGenerator';
 import Task from './Task/Task';
 import AddTask from './Input/AddTask';
 import Confirm from './RemoveModal/RemoveModal';
