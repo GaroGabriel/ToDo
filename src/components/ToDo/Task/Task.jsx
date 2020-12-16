@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Button, } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt,faPenSquare } from '@fortawesome/free-solid-svg-icons';
 import './task.css';
 
 class Task extends Component {
@@ -32,10 +32,18 @@ class Task extends Component {
                         {task.text}
                     </Card.Text>
                     <Button
+                        className='button'
                         variant="danger"
                         onClick={() => this.props.onRemove(task._id)}
                         disabled={disabled}>
                         <FontAwesomeIcon icon={faTrashAlt} />
+                    </Button>
+                    <Button
+                        className='button'
+                        variant="info"
+                        onClick={()=>this.props.onEdit(task)}
+                        disabled={disabled}>
+                        <FontAwesomeIcon icon={faPenSquare} />
                     </Button>
                 </Card.Body>
             </Card>

@@ -1,18 +1,22 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Button, Col, Row, Container } from 'react-bootstrap';
 import './ToDo.css';
 import idGenerator from './idGenerator';
 import Task from './Task/Task';
 import AddTask from './Input/AddTask';
 import Confirm from './RemoveModal/RemoveModal';
+import EditTaskModal from './EditTaskModal/EditTaskModal';
 
-class ToDo extends Component {
+class ToDo extends PureComponent {
 
     state = {
         tasks: [],
         selectedTasks: new Set(),
-        toggle: false
+        toggle: false,
+        // editTask:''
     }
+
+
     hendleCheck = (taskId) => {
         const selectedTasks = new Set(this.state.selectedTasks)
         if (selectedTasks.has(taskId)) {
@@ -78,7 +82,7 @@ class ToDo extends Component {
 
     render() {
 
-        const { toggle, tasks, selectedTasks } = this.state;
+        const { toggle, tasks, selectedTasks,editTask } = this.state;
         const task = tasks.map((task, index) => {
             return (
 
@@ -89,6 +93,7 @@ class ToDo extends Component {
                         onCheck={this.hendleCheck}
                         disabled={!!selectedTasks.size}
                         key={task._id}
+                        onEdit={(editTask)=>{console.log(editTask)}}
                     />
                 </Col>
             )
@@ -119,6 +124,9 @@ class ToDo extends Component {
                     onClose={this.toggleConfirm}
                     selectedTasksSize={selectedTasks.size}
                 />}
+
+                {!!editTask&&<EditTaskModal/>
+                }
 
             </div>
         )
