@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+}
+.input{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgb(255, 255, 255);
+width: 50%;
+    min-height:30px;
+    width: 100%;
+    /* transition: 1s all ease; */
+
+ 
+}
+.input:focus {
+   
+    transition: all 1s ease;
+    border-bottom: 1px solid rgb(85, 55, 255);
+    width: 100%;
+}

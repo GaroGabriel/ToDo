@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Button, Col, Row, Container } from 'react-bootstrap';
 import './ToDo.css';
 import idGenerator from './idGenerator';
@@ -7,13 +7,14 @@ import AddTask from './Input/AddTask';
 import Confirm from './RemoveModal/RemoveModal';
 import EditTaskModal from './EditTaskModal/EditTaskModal';
 
-class ToDo extends PureComponent {
+class ToDo extends Component {
 
     state = {
+        editTask: null,
         tasks: [],
         selectedTasks: new Set(),
         toggle: false,
-        // editTask:''
+
     }
 
 
@@ -65,6 +66,12 @@ class ToDo extends PureComponent {
         })
     }
 
+    toggleEditModal = (task) => {
+        this.setState({
+            editTask: task
+        })
+    }
+
     removeSelected = () => {
         let tasks = [...this.state.tasks]
 
@@ -78,11 +85,21 @@ class ToDo extends PureComponent {
         })
     }
 
+    saveTask = (editedTask) => {
+        const tasks = [...this.state.tasks]
+        const foundTaskIndex = tasks.findIndex((task) => task._id === editedTask._id)
+        tasks[foundTaskIndex] = editedTask
 
+        this.setState({
+            tasks,
+            editTask: null,
+
+        })
+    }
 
     render() {
 
-        const { toggle, tasks, selectedTasks,editTask } = this.state;
+        const { toggle, tasks, selectedTasks, editTask } = this.state;
         const task = tasks.map((task, index) => {
             return (
 
@@ -93,7 +110,7 @@ class ToDo extends PureComponent {
                         onCheck={this.hendleCheck}
                         disabled={!!selectedTasks.size}
                         key={task._id}
-                        onEdit={(editTask)=>{console.log(editTask)}}
+                        onEdit={() => this.toggleEditModal(task)}
                     />
                 </Col>
             )
@@ -122,10 +139,15 @@ class ToDo extends PureComponent {
                 {toggle && <Confirm
                     onSubmit={this.removeSelected}
                     onClose={this.toggleConfirm}
-                    selectedTasksSize={selectedTasks.size}
+                    count={selectedTasks.size}
                 />}
 
-                {!!editTask&&<EditTaskModal/>
+                {
+                    !!editTask &&
+                    <EditTaskModal
+                        data={editTask}
+                        onSave={this.saveTask}
+                        onClose={() => this.toggleEditModal(null)} />
                 }
 
             </div>
