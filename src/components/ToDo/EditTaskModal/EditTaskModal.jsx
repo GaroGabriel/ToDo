@@ -37,7 +37,7 @@ export default class EditTaskModal extends Component {
 				onHide={props.onClose}
 				animation={true}>
 				<Modal.Header closeButton>
-					<Modal.Title text='center'>Edit Task{props.count} tasks?</Modal.Title>
+					<Modal.Title text='center'>Edit {props.count} Tasks?</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<input
@@ -54,7 +54,7 @@ export default class EditTaskModal extends Component {
 					</Button>
 					<Button
 						variant="danger"
-						onClick={props.handleSave}>
+						onClick={this.handleSave}>
 						<FontAwesomeIcon icon={faCheck} />
 					</Button>
 				</Modal.Footer>
