@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Col, Row, Container } from 'react-bootstrap';
 import './ToDo.css';
-import idGenerator from './idGenerator';
+
 import Task from './Task/Task';
 import AddTask from './Input/AddTask';
 import Confirm from './RemoveModal/RemoveModal';
@@ -35,18 +35,30 @@ class ToDo extends Component {
 
 
 
-    addTask = (value) => {
-        const newTask = {
-            text: value,
-            _id: idGenerator()
-        }
+    addTask = (data) => {
 
-        const task = [newTask, ...this.state.tasks]
-
-
-        this.setState({
-            tasks: task,
+        const body = JSON.stringify(data)
+        fetch('http://localhost:3001/task', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'aplication/json'
+            },
+            body
         })
+            .then((res) => res.json())
+            .then((response) => console.log(response))
+
+
+        // const newTask = {
+        //     text: value,
+        // }
+
+        // const task = [newTask, ...this.state.tasks]
+
+
+        // this.setState({
+        //     tasks: task,
+        // })
 
 
     }
